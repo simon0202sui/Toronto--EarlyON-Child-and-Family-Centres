@@ -1,7 +1,7 @@
 LLM: ChatGPT-4.
 Date: 22 January 2024
 user:
-how to create a new token in github
+how to create a new token in github?
 
 ChatGPT:
 To create a new Personal Access Token (PAT) on GitHub, follow these steps. This guide is accurate as of my last update, but GitHub's interface and procedures can change, so it's always a good idea to check the latest documentation if you encounter any discrepancies.
