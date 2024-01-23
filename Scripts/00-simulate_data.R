@@ -3,7 +3,7 @@
 # Author: Pengyu Sui
 # Email: pengyu.sui@mail.utoronto.ca
 # Date: 21 Jan 2024
-# Prerequisites: -
+# Prerequisites: NA
 
 library(tibble)
 red_light_camera_data <- tibble(
