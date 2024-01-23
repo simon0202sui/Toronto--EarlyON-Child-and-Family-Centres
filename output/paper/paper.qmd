@@ -36,7 +36,7 @@ Section 2 imports data about Toronto's red light cameras from the opendatatoront
 
 # Data {#sec-data}
 
-I summarized the number of red light cameras for three different roads in different years and ues 'kable()' from 'knitr' [@knitr] to create @tbl-toronto
+I summarized the number of red light cameras for three different roads in different years and ues 'kable()' from 'knitr' [@knitr] to create @tbl-toronto.
 ```{r}
 #| label: tbl-toronto
 #| tbl-cap: red light cameras numbers in toronto
