@@ -1,0 +1,109 @@
+---
+title: "Toronto's red light cameras annal change "
+subtitle: "Trend of change"
+author: 
+  - Pengyu Sui
+thanks: "Code and data are available at: https://github.com/simon0202sui/Toronto--red-light-cameras-change.git."
+date: today
+date-format: long
+abstract: "The number of red light cameras is generally increasing by year, the number of cameras on certain road sections has increased significantly, the number of cameras on some road sections has not changed much."
+format: pdf
+number-sections: true
+bibliography: references.bib
+---
+
+```{r}
+#| include: false
+#| warning: false
+#| message: false
+library(here)
+library(tidyverse)
+#import raw data
+toronto_red_light_cameras <-
+  read_csv(
+    here::here("inputs/data/unedited_data.csv")
+  )
+  show_col_types=FALSE
+```
+
+
+# Introduction
+The behavior of vehicles running red lights is very common in Toronto, so I counted the changes in the number of red light cameras on various road sections in Toronto over the past 10 years. I wanted to find out the trend of changes, which road sections have a significant increase in cameras and which road sections are not obvious. Therefore, I downloaded data from opendatatoronto [@opandatatoronto] and use R [@citeR] to analyze the data.
+
+Section 2 imports data about Toronto's red light cameras from the opendatatoronto database. And use kable() to create a table. Section 3 uses ggplot2 [@ggplot2] to create a line chart to analyze the trend of changes in the number of cameras on different roads.
+@sec-data....
+
+
+# Data {#sec-data}
+
+I summarized the number of red light cameras for three different roads in different years and ues 'kable()' from 'knitr' [@knitr] to create @tbl-toronto
+```{r}
+#| label: tbl-toronto
+#| tbl-cap: red light cameras numbers in toronto
+#| echo: false
+library(here)
+library(tidyverse)
+library(dplyr)
+library(readr)
+library(kableExtra)
+
+toronto_red_light_cameras_clean <- toronto_red_light_cameras %>%
+  filter(LINEAR_NAME_FULL_1 %in% c("Richmond St E", "Lake Shore Blvd W", "Steeles Ave W")) %>%
+  mutate(Year = format(as.Date(ACTIVATION_DATE), "%Y")) %>%
+  select(LINEAR_NAME_FULL_1, TCS, Year)
+max_number_by_street_year <- toronto_red_light_cameras_clean %>%
+  group_by(Year, LINEAR_NAME_FULL_1) %>%
+  summarize(Max_Number = max(TCS))
+print(max_number_by_street_year)
+kable(
+  max_number_by_street_year,
+  col.names = c("Year", "Street", "Max Number"),  
+  digits = 1
+)
+
+
+```
+
+Refer to (@fig-toronto) use ggplot2 [@ggplot2] to create a line graph.
+```{r}
+#| label: fig-toronto
+#| fig-cap: red light cameras annal change
+#| echo: false
+#| warning: false
+#| message: false
+toronto_red_light_cameras_clean <- toronto_red_light_cameras %>%
+  filter(LINEAR_NAME_FULL_1 %in% c("Richmond St E", "Lake Shore Blvd W", "Steeles Ave W")) %>%
+  mutate(Year = format(as.Date(ACTIVATION_DATE), "%Y")) %>%
+  select(LINEAR_NAME_FULL_1, TCS, Year)
+max_number_by_street_year <- toronto_red_light_cameras_clean %>%
+  group_by(Year, LINEAR_NAME_FULL_1) %>%
+  summarize(Max_Number = max(TCS))
+library(ggplot2)
+max_number_by_street_year$Max_Number <- as.numeric(as.character(max_number_by_street_year$Max_Number))
+library(ggplot2)
+ggplot(max_number_by_street_year, aes(x = Year, y = Max_Number, group = LINEAR_NAME_FULL_1, color = LINEAR_NAME_FULL_1)) +
+  geom_line() +  
+  geom_point() + 
+  labs(x = "Year", y = "Max Number", color = "Street") +
+  theme_minimal() 
+
+```
+
+# Appendix
+The process of organizing and simplifying data
+```{r}
+#| echo: false
+toronto_red_light_cameras_clean <- toronto_red_light_cameras %>%
+  filter(LINEAR_NAME_FULL_1 %in% c("Richmond St E", "Lake Shore Blvd W", "Steeles Ave W")) %>%
+  mutate(Year = format(as.Date(ACTIVATION_DATE), "%Y")) %>%
+  select(LINEAR_NAME_FULL_1, TCS, Year)
+
+max_number_by_street_year <- toronto_red_light_cameras_clean %>%
+  group_by(Year, LINEAR_NAME_FULL_1) %>%
+  summarize(Max_Number = max(TCS), .groups = 'drop')  
+summarize()
+```
+
+# References
+
+
