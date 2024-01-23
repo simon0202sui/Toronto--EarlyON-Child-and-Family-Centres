@@ -14,6 +14,6 @@ red_light_camera_data <- tibble(
 
 # View the dataset
 head(red_light_camera_data)
-
-
+library(git)
+gitcreds_set()
 
