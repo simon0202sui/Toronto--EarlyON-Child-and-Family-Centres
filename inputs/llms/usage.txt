@@ -1,0 +1,23 @@
+LLM: ChatGPT-4.
+Date: 22 January 2024
+user:
+how to create a new token in github
+
+ChatGPT:
+To create a new Personal Access Token (PAT) on GitHub, follow these steps. This guide is accurate as of my last update, but GitHub's interface and procedures can change, so it's always a good idea to check the latest documentation if you encounter any discrepancies.
+
+Step 1: Sign in to GitHub
+Go to GitHub and log in with your credentials.
+Step 2: Access Token Settings
+Click on your profile photo in the upper-right corner of the GitHub page.
+Select Settings from the dropdown menu.
+In the left sidebar, scroll down and click on Developer settings.
+On the Developer settings page, click on Personal access tokens.
+Then click on the Generate new token button.
+Step 3: Generate New Token
+Give your token a descriptive name in the Note field.
+Select the scopes or permissions you wish the token to have. Scopes control the access for the token. For instance, selecting repo gives full control of private repositories. Be cautious with the permissions to ensure your token only has access to necessary information and features.
+Optionally, you can set the token to expire after a certain number of days. Choosing an expiration is recommended for security reasons.
+Step 4: Create the Token
+After selecting your desired scopes and setting an expiration, scroll down and click Generate token.
+Important: Make sure to copy your new personal access token now. You won’t be able to see it again once you navigate away from the page.

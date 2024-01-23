@@ -1,5 +1,5 @@
 ---
-title: "Toronto's red light cameras annal change "
+title: "Toronto's red light cameras annal change"
 subtitle: "Trend of change"
 author: 
   - Pengyu Sui
@@ -28,7 +28,7 @@ toronto_red_light_cameras <-
 
 
 # Introduction
-The behavior of vehicles running red lights is very common in Toronto, so I counted the changes in the number of red light cameras on various road sections in Toronto over the past 10 years. I wanted to find out the trend of changes, which road sections have a significant increase in cameras and which road sections are not obvious. Therefore, I downloaded data from opendatatoronto [@opandatatoronto] and use R [@citeR] to analyze the data.
+The behavior of vehicles running red lights is very common in Toronto, so I counted the changes in the number of red light cameras on various road sections in Toronto over the past 10 years. I wanted to find out the trend of changes, which road sections have a significant increase in cameras and which road sections are not obvious. Therefore, I downloaded data from the @opendatatoronto and use R [@citeR] to analyze the data.
 
 Section 2 imports data about Toronto's red light cameras from the opendatatoronto database. And use kable() to create a table. Section 3 uses ggplot2 [@ggplot2] to create a line chart to analyze the trend of changes in the number of cameras on different roads.
 @sec-data....
@@ -53,7 +53,7 @@ toronto_red_light_cameras_clean <- toronto_red_light_cameras %>%
   select(LINEAR_NAME_FULL_1, TCS, Year)
 max_number_by_street_year <- toronto_red_light_cameras_clean %>%
   group_by(Year, LINEAR_NAME_FULL_1) %>%
-  summarize(Max_Number = max(TCS))
+  summarize(Max_Number = max(TCS), .groups = 'drop')
 print(max_number_by_street_year)
 kable(
   max_number_by_street_year,
@@ -101,9 +101,7 @@ toronto_red_light_cameras_clean <- toronto_red_light_cameras %>%
 max_number_by_street_year <- toronto_red_light_cameras_clean %>%
   group_by(Year, LINEAR_NAME_FULL_1) %>%
   summarize(Max_Number = max(TCS), .groups = 'drop')  
-summarize()
 ```
 
 # References
-
 
